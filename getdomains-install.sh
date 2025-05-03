@@ -896,7 +896,7 @@ add_internal_wg() {
 install_awg_packages() {
     # Получение pkgarch с наибольшим приоритетом
     # PKGARCH=$(opkg print-architecture | awk 'BEGIN {max=0} {if ($3 > max) {max = $3; arch = $2}} END {print arch}')
-    PKGARCH=$(apk arch | awk 'BEGIN {max=0} {if ($3 > max) {max = $3; arch = $2}} END {print arch}')
+    PKGARCH="aarch64"
     
 
     TARGET=$(ubus call system board | jsonfilter -e '@.release.target' | cut -d '/' -f 1)
