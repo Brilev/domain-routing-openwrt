@@ -3,7 +3,11 @@ name: Create Release on Tag
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v24.10.0"
+    pkgarch: "aarch64_cortex-a53"
+    target: "qualcommax"
+    subtarget: "ipq807x"
+    vermagic: 
   workflow_call:
     inputs:
       tag_name:
