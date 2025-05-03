@@ -14,7 +14,7 @@ sh <(wget -O - https://raw.githubusercontent.com/itdoginfo/domain-routing-openwr
 
 # Скрипт для удаления
 ```
-sh <(wget -O - https://raw.githubusercontent.com/itdoginfo/domain-routing-openwrt/refs/heads/master/getdomains-uninstall.sh)
+sh <(wget -O - https://raw.githubusercontent.com/Brilev/domain-routing-openwrt/refs/heads/master/getdomains-uninstall.sh)
 ```
 
 ## AmneziaWG
