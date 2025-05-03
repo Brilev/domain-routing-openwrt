@@ -118,7 +118,7 @@ add_tunnel() {
         else
             echo "Installed wg..."
             # opkg install wireguard-tools
-            apk add wireguard-tools
+            apk add --allow-untrusted wireguard-tools
         fi
 
         route_vpn
@@ -172,7 +172,7 @@ add_tunnel() {
         else
             echo "Installed openvpn"
             # opkg install openvpn-openssl
-            apk add openvpn-openssl
+            apk add --allow-untrusted openvpn-openssl
         fi
         printf "\033[32;1mConfigure route for OpenVPN\033[0m\n"
         route_vpn
@@ -187,7 +187,7 @@ add_tunnel() {
             if  [[ "$AVAILABLE_SPACE" -gt 2000 ]]; then
                 echo "Installed sing-box"
                 # opkg install sing-box
-                apk add sing-box
+                apk add --allow-untrusted sing-box
             else
                 printf "\033[31;1mNo free space for a sing-box. Sing-box is not installed.\033[0m\n"
                 exit 1
@@ -329,7 +329,7 @@ dnsmasqfull() {
         printf "\033[32;1mInstalled dnsmasq-full\033[0m\n"
         # cd /tmp/ && opkg download dnsmasq-full
         # opkg remove dnsmasq && opkg install dnsmasq-full --cache /tmp/
-        apk del dnsmasq && apk add dnsmasq-full
+        apk del dnsmasq && apk add --allow-untrusted dnsmasq-full
         # Зачем это не понятно
         # [ -f /etc/config/dhcp-opkg ] && cp /etc/config/dhcp /etc/config/dhcp-old && mv /etc/config/dhcp-opkg /etc/config/dhcp
     fi
@@ -536,7 +536,7 @@ add_dns_resolver() {
         else
             printf "\033[32;1mInstalled dnscrypt-proxy2\033[0m\n"
             # opkg install dnscrypt-proxy2
-            apk add dnscrypt-proxy2
+            apk add --allow-untrusted dnscrypt-proxy2
             if grep -q "# server_names" /etc/dnscrypt-proxy2/dnscrypt-proxy.toml; then
                 sed -i "s/^# server_names =.*/server_names = [\'google\', \'cloudflare\', \'scaleway-fr\', \'yandex\']/g" /etc/dnscrypt-proxy2/dnscrypt-proxy.toml
             fi
@@ -572,7 +572,7 @@ add_dns_resolver() {
         else
             printf "\033[32;1mInstalled stubby\033[0m\n"
             # opkg install stubby
-            apk add stubby
+            apk add --allow-untrusted stubby
 
             printf "\033[32;1mConfigure Dnsmasq for Stubby\033[0m\n"
             uci set dhcp.@dnsmasq[0].noresolv="1"
@@ -596,7 +596,7 @@ add_packages() {
         else
             printf "\033[32;1mInstalling $package...\033[0m\n"
             # opkg install "$package"
-            apk add "$package"
+            apk add --allow-untrusted "$package"
             
             if "$package" --version >/dev/null 2>&1; then
                 printf "\033[32;1m$package was successfully installed and available\033[0m\n"
@@ -717,7 +717,7 @@ add_internal_wg() {
         else
             echo "Installed wg..."
             # opkg install wireguard-tools
-            apk add wireguard-tools
+            apk add --allow-untrusted wireguard-tools
         fi
     fi
 
@@ -926,7 +926,7 @@ install_awg_packages() {
         fi
 
         # opkg install "$AWG_DIR/$AMNEZIAWG_TOOLS_FILENAME"
-        apk add "$AWG_DIR/$AMNEZIAWG_TOOLS_FILENAME"
+        apk add --allow-untrusted "$AWG_DIR/$AMNEZIAWG_TOOLS_FILENAME"
 
         if [ $? -eq 0 ]; then
             echo "amneziawg-tools file downloaded successfully"
@@ -952,7 +952,7 @@ install_awg_packages() {
         fi
         
         # opkg install "$AWG_DIR/$KMOD_AMNEZIAWG_FILENAME"
-        apk add "$AWG_DIR/$KMOD_AMNEZIAWG_FILENAME"
+        apk add --allow-untrusted "$AWG_DIR/$KMOD_AMNEZIAWG_FILENAME"
 
         if [ $? -eq 0 ]; then
             echo "kmod-amneziawg file downloaded successfully"
@@ -978,7 +978,7 @@ install_awg_packages() {
         fi
 
         # opkg install "$AWG_DIR/$LUCI_APP_AMNEZIAWG_FILENAME"
-        apk add "$AWG_DIR/$LUCI_APP_AMNEZIAWG_FILENAME"
+        apk add --allow-untrusted "$AWG_DIR/$LUCI_APP_AMNEZIAWG_FILENAME"
 
         if [ $? -eq 0 ]; then
             echo "luci-app-amneziawg file downloaded successfully"
